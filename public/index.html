@@ -1,0 +1,537 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <title>WhatRTC? Everything you need to know to connect browsers to the world.</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=792, user-scalable=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <link rel="stylesheet" href="shower/themes/phil/styles/screen.css">
+</head>
+<body class="list">
+  <header class="caption">
+    <h1>WhatRTC? Everything you need to know to connect browsers to the world.</h1>
+    <p>Phil Nash, Twilio</p>
+  </header>
+
+  <section class="slide shout"><div>
+    <h2>WhatRTC?</h2>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <h2 style="margin-bottom:24px;">Phil Nash</h2>
+    <p style="margin-bottom:24px;">@philnash</p>
+    <p style="margin-bottom:24px;">http://philna.sh</p>
+    <p style="margin-bottom:24px;">philnash@twilio.com</p>
+    <img src="pictures/twilio.png" class="place b l" style="width:30%;bottom:20%;left:96px">
+  </div></section>
+
+  <section class="slide shout"><div>
+    <h2 style="text-align:center">+442033899329</h2>
+    <ul id="messages"></ul>
+  </div></section>
+
+  <section class="slide shout"><div>
+    <h2>What is WebRTC?</h2>
+  </div></section>
+
+  <section class="slide alt shout"><div>
+    <h2>Web Real Time Communication</h2>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <img src="/pictures/bacon.png" class="place center">
+  </div></section>
+
+  <section class="slide shout alt"><div>
+    <h2><strong>Really</strong> Real Time</h2>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <h2>APIs</h2>
+
+    <ul>
+      <li class="next">getUserMedia</li>
+      <li class="next">RTCPeerConnection</li>
+      <li class="next">RTCDataChannel</li>
+    </ul>
+  </div></section>
+
+  <section class="slide alt shout"><div>
+    <h2><strong>Browser</strong> support</h2>
+  </div></section>
+
+  <section class="slide shout alt cover h"><div>
+    <img src="/pictures/laughing.gif" />
+  </div></section>
+
+  <section class="slide alt"><div>
+    <ul id="logos">
+      <li><img src="/pictures/chrome.png"></li>
+      <li><img src="/pictures/firefox.png"></li>
+      <li><img src="/pictures/safari.png" class="nope"></li>
+      <li><img src="/pictures/opera.png"></li>
+      <li><img src="/pictures/ie.png" class="nope"></li>
+    </ul>
+  </div></section>
+
+  <section class="slide alt shout"><div>
+    <h2>What does WebRTC <strong>do?</strong></h2>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <div id="videos">
+      <video id="local-video" autoplay></video>
+      <video id="remote-video" autoplay></video>
+    </div>
+    <button id="get-video" class="btn">Get Video</button>
+    <button id="call" class="btn" disabled>Call</button>
+    <button id="hangup" class="btn" disabled>Hang up</button>
+  </div></section>
+
+  <section class="slide alt shout"><div>
+    <h2><strong>Awesome</strong> right?</h2>
+  </div></section>
+
+  <section class="slide alt shout"><div>
+    <h2>How does it <strong>work?</strong></h2>
+  </div></section>
+
+  <section class="slide alt shout"><div>
+    <h2>What <strong>doesn't</strong> WebRTC do?</h2>
+  </div></section>
+
+  <section class="slide shout alt"><div>
+    <h2>Tell the <strong>truth</strong></h2>
+  </div></section>
+
+  <section class="slide shout alt"><div>
+    <h2>Peer to Peer<strong>?</strong></h2>
+  </div></section>
+
+  <section class="slide shout alt cover h"><div>
+    <img src="/pictures/servers.jpg">
+  </div></section>
+
+  <section class="slide shout"><div>
+    <h2>Presence</h2>
+  </div></section>
+
+  <section class="slide alt long-line"><div>
+    <pre><code>  socket.on('join', function(room){</code>
+    <code>  var clients = io.sockets.adapter.rooms[room];</code>
+    <code>  var numClients = Object.keys(clients).length;</code>
+    <code>  if (numClients == 0) {</code>
+    <code>    socket.join(room);</code>
+    <code>  } else if (numClients == 1) {</code>
+    <code>    socket.join(room);</code>
+    <code>    socket.emit('ready', room);</code>
+    <code>    socket.broadcast.emit('ready', room);</code>
+    <code>  } else {</code>
+    <code>    socket.emit('full', room);</code>
+    <code>  }</code></pre>
+  </div></section>
+
+  <section class="slide shout"><div>
+    <h2>NAT Traversal</h2>
+  </div></section>
+
+  <section class="slide alt cover w"><div>
+    <img src="/pictures/vanilla_ice.jpg">
+  </div></section>
+
+  <section class="slide alt"><div>
+    <h2>ICE ICE Baby</h2>
+    <blockquote>
+      <p>All right stop, collaborate and listen<br/>
+      Ice is back with my brand new invention</p>
+    </blockquote>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <h2>NAT Traversal</h2>
+
+    <ul>
+      <li><strong>NAT</strong> &mdash; Network Address Translation</li>
+      <li><strong>ICE</strong> &mdash; Interactive Connectivity Establishment</li>
+      <li><strong>STUN</strong> &mdash; Session Traversal Utilities for NAT</li>
+      <li><strong>TURN</strong> &mdash; Traversal Using Relays around NAT</li>
+    </ul>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <pre><code>config = { iceServers: [</code>
+    <code>    {"url":"stun:global.stun.twilio.com:3478?transport=udp"}</code>
+    <code>  ]</code>
+    <code>};</code>
+    <code>peerConnection = new RTCPeerConnection(config);</code>
+    <code>&nbsp;</code>
+    <code>peerConnection.onicecandidate = function(candidate){</code>
+    <code>  // do something</code>
+    <code>}</code></pre>
+  </div></section>
+
+  <section class="slide" style="background-color:#272725"><div>
+    <img src="/pictures/nat.svg" class="place center" height="80%">
+  </div></section>
+
+  <section class="slide shout"><div>
+    <h2>Signalling</h2>
+  </div></section>
+
+  <section class="slide" style="background-color:#272725"><div>
+    <img src="/pictures/nat.svg" class="place center" height="80%">
+  </div></section>
+
+  <section class="slide alt shout"><div>
+    <h2>Web<strong>Sockets</strong></h2>
+  </div></section>
+
+  <section class="slide alt shout"><div>
+    <h2>Warning:<br> <strong>Code ahead</strong></h2>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <pre><code>peerConnection.onicecandidate = function(candidate){</code>
+    <code>  socket.emit('candidate', JSON.stringify(candidate));</code>
+    <code>}</code>
+    <code>&nbsp;</code>
+    <code>socket.on('candidate', function(candidate){</code>
+    <code>  rtcCandidate = new RTCIceCandidate(JSON.parse(candidate));</code>
+    <code>  peerConnection.addIceCandidate(rtcCandidate);</code>
+    <code>});</code></pre>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <pre><code>socket.on('candidate', function(candidate){</code>
+    <code>  socket.broadcast.emit('candidate', candidate);</code>
+    <code>});</code></pre>
+  </div></section>
+
+  <section class="slide shout alt"><div>
+    <h2>What about <strong>media</strong>?<h2>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <pre><code>getUserMedia({video: true, audio: false},</code>
+    <code>  function(stream){</code>
+      <code>    videoElement.src = URL.createObjectURL(stream);</code>
+      <code>    peerConnection.addStream(stream);</code>
+      <code>    peerConnection.createOffer(success, fail);</code>
+    <code>  },</code>
+    <code>  function(err) { console.log('Oh biscuits...'); }</code>
+    <code>);</code></pre>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <pre><code>peerConnection.createOffer(</code>
+    <code>  function(offer){</code>
+    <code>    peerConnection.setLocalDescription(offer)</code>
+    <code>    socket.emit('offer', JSON.stringify(offer)</code>
+    <code>  },</code>
+    <code>  function(err){ console.log('Oh biscuits...'); });</code>
+    <code>);</code></pre>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <pre><code>socket.on('offer', function(offer){</code>
+    <code>  socket.broadcast.emit('offer', offer);</code>
+    <code>});</code></pre>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <pre><code>socket.on('offer', function(offer){</code>
+    <code>  rtcOffer = new RTCSessionDescription(JSON.parse(offer));</code>
+    <code>  peerConnection.setRemoteDescription(rtcOffer);</code>
+    <code>  peerConnection.createAnswer(</code>
+    <code>    function(answer){</code>
+    <code>      peerConnection.setLocalDescription(answer);</code>
+    <code>      socket.emit('answer', JSON.stringify(answer));</code>
+    <code>    },</code>
+    <code>    function(err){ console.log('Biscuits?'); }</code>
+    <code>  );</code>
+    <code>});</code></pre>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <pre><code>socket.on('answer', function(answer){</code>
+    <code>  socket.broadcast.emit('answer', answer);</code>
+    <code>});</code></pre>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <pre><code>socket.on('answer', function(answer){</code>
+    <code>  rtcAnswer = new RTCSessionDescription(JSON.parse(answer));</code>
+    <code>  peerConnection.setRemoteDescription(rtcAnswer);</code>
+    <code>});</code></pre>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <pre><code>peerConnection.onaddstream = function(stream){</code>
+    <code>  remoteVideoElement.src = URL.createObjectURL(stream);</code>
+    <code>});</code></pre>
+  </div></section>
+
+  <section class="slide shout alt"><div>
+    <h2>No more <strong>code</strong></h2>
+  </div></section>
+
+  <section class="slide shout"><div>
+    <h2>WebRTC Ideas</h2>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <h2>Waggledance</h2>
+
+    <p>Distribute bandwidth amongst video viewers</p>
+
+    <ul>
+      <li>Example: <a href="http://waggle.monkeypatch.me/">http://waggle.monkeypatch.me/</a></li>
+      <li>Code: <a href="https://github.com/tOkeshu/waggle.js">https://github.com/tOkeshu/waggle.js</a></li>
+      <li>Video: <a href="https://www.youtube.com/watch?v=pyIIkUV3moM">https://www.youtube.com/watch?v=pyIIkUV3moM</a></li>
+    </ul>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <h2>Webtorrent</h2>
+
+    <p>Streaming torrent client for node and the browser</p>
+
+    <ul>
+      <li>Code: <a href="http://webtorrent.io/">http://webtorrent.io/</a></li>
+      <li>npm: <a href="https://www.npmjs.org/package/webtorrent">https://www.npmjs.org/package/webtorrent</a></li>
+    </ul>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <h2>Remember when you texted in?</h2>
+    <p><button class="btn" id="client-call" style="font-size:128px">Call</button></p>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <h2>Resources</h2>
+    <ul>
+      <li><a href="https://github.com/philnash/video-chat">https://github.com/philnash/video-chat</a></li>
+      <li><a href="https://github.com/philnash/whatrtc">https://github.com/philnash/whatrtc</a></li>
+    </ul>
+  </div></section>
+
+  <section class="slide alt"><div>
+    <h2 style="margin-bottom:24px;">Thanks!</h2>
+    <p style="margin-bottom:24px;">@philnash</p>
+    <p style="margin-bottom:24px;">http://philna.sh</p>
+    <p style="margin-bottom:24px;">philnash@twilio.com</p>
+    <img src="pictures/twilio.png" class="place b l" style="width:30%;bottom:20%;left:96px">
+
+    <footer>
+      <p>Questions, how to contact me, etc</p>
+    </footer>
+  </div></section>
+
+  <!-- <div class="progress"><div></div></div> -->
+  <script src="shower/shower.min.js"></script>
+  <!-- Copyright © 2014 Phil Nash, Mint Digital. -->
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="//static.twilio.com/libs/twiliojs/1.2/twilio.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/reqwest/1.1.5/reqwest.js"></script>
+  <script src="/js/adapter.js"></script>
+  <script>
+    var socket = io(),
+        messages = [],
+        numbers = [],
+        messageList = document.getElementById('messages'),
+        clientCallButton = document.getElementById('client-call');
+    socket.on('from', function(from){
+      numbers.push(from);
+    });
+    socket.on('body', function(body){
+      var listItem = document.createElement('li'),
+          textItem = document.createTextNode(body);
+      listItem.appendChild(textItem);
+      messageList.appendChild(listItem);
+      messageList.scrollTop = messageList.scrollHeight;
+    });
+
+    clientCallButton.addEventListener('click', function(event){
+      reqwest({
+        url: '/capability',
+        method: 'POST',
+        success: function(data){
+          var randomPhoneNumber = numbers[Math.floor(Math.random()*numbers.length)];
+          Twilio.Device.setup(data);
+          Twilio.Device.connect({
+            PhoneNumber: randomPhoneNumber,
+            CallerId: '+442033899329'
+          });
+        }
+      });
+    }, false);
+
+    var VideoChat = {
+      // Initialise our connection to the WebSocket.
+      socket: socket,
+
+      // Call to getUserMedia (provided by adapter.js for cross browser compatibility)
+      // asking for access to both the video and audio streams. If the request is
+      // accepted callback to the onMediaStream function, otherwise callback to the
+      // noMediaStream function.
+      requestMediaStream: function(event){
+        getUserMedia(
+          {video: true, audio: false},
+          VideoChat.onMediaStream,
+          VideoChat.noMediaStream
+        );
+      },
+
+      // The onMediaStream function receives the media stream as an argument.
+      onMediaStream: function(stream){
+        // Get the video element.
+        VideoChat.localVideo = document.getElementById('local-video');
+        // Turn the volume down to 0 to avoid echoes.
+        VideoChat.localVideo.volume = 0;
+        VideoChat.localStream = stream;
+        VideoChat.videoButton.setAttribute('disabled', 'disabled');
+        // Turn the media stream into a URL that can be used by the video and add it
+        // as the video's `src`. As the video has the `autoplay` attribute it will
+        // start to stream immediately.
+        VideoChat.localVideo.src = window.URL.createObjectURL(stream);
+        // Now we're ready to join the chat room.
+        VideoChat.socket.emit('join', 'test');
+        VideoChat.socket.on('ready', VideoChat.readyToCall);
+        VideoChat.socket.on('offer', VideoChat.onOffer);
+      },
+
+      // There's not much to do in this demo if there is no media stream. So
+      // let's just stop.
+      noMediaStream: function(){
+        console.log("No media stream for us.");
+        // Sad trombone.
+      },
+
+      // When we are ready to call, enable the Call button.
+      readyToCall: function(event){
+        VideoChat.callButton.removeAttribute('disabled');
+      },
+
+      startCall: function(event){
+        VideoChat.socket.on('token', VideoChat.onToken(VideoChat.createOffer));
+        VideoChat.socket.emit('token');
+      },
+
+      hangUp: function(event){
+        if(typeof event !== 'undefined') { VideoChat.socket.emit('hangup'); }
+        VideoChat.peerConnection.close();
+        VideoChat.localVideo.pause();
+        VideoChat.localVideo.src = '';
+        VideoChat.remoteVideo.pause();
+        VideoChat.remoteVideo.src = '';
+        VideoChat.localStream.stop();
+        VideoChat.hangUpButton.setAttribute('disabled', 'disabled');
+      },
+
+      onOffer: function(offer){
+        VideoChat.socket.on('token', VideoChat.onToken(VideoChat.createAnswer(offer)));
+        VideoChat.socket.emit('token');
+      },
+
+      onAnswer: function(answer){
+        var answer = new RTCSessionDescription(JSON.parse(answer));
+        VideoChat.peerConnection.setRemoteDescription(answer);
+      },
+
+      createOffer: function(){
+        VideoChat.peerConnection.createOffer(
+          function(offer){
+            VideoChat.peerConnection.setLocalDescription(offer);
+            VideoChat.socket.emit('offer', JSON.stringify(offer));
+          },
+          function(err){
+            console.log(err);
+          }
+        );
+      },
+
+      createAnswer: function(offer){
+        return function(){
+          rtcOffer = new RTCSessionDescription(JSON.parse(offer));
+          VideoChat.peerConnection.setRemoteDescription(rtcOffer);
+          VideoChat.peerConnection.createAnswer(
+            function(answer){
+              VideoChat.peerConnection.setLocalDescription(answer);
+              VideoChat.socket.emit('answer', JSON.stringify(answer));
+            },
+            function(err){
+              console.log(err);
+            }
+          );
+        }
+      },
+
+      onToken: function(callback){
+        return function(token){
+          VideoChat.peerConnection = new RTCPeerConnection({
+            iceServers: token.iceServers
+          });
+          VideoChat.peerConnection.addStream(VideoChat.localStream);
+          VideoChat.peerConnection.onicecandidate = VideoChat.onIceCandidate;
+          VideoChat.peerConnection.onaddstream = VideoChat.onAddStream;
+          VideoChat.socket.on('candidate', VideoChat.onCandidate);
+          VideoChat.socket.on('answer', VideoChat.onAnswer);
+          callback();
+        }
+      },
+
+      onIceCandidate: function(event){
+        if(event.candidate){
+          VideoChat.socket.emit('candidate', JSON.stringify(event.candidate));
+        }
+      },
+
+      onAddStream: function(event){
+        VideoChat.remoteVideo = document.getElementById('remote-video');
+        VideoChat.remoteVideo.src = window.URL.createObjectURL(event.stream);
+        VideoChat.callButton.setAttribute('disabled', 'disabled');
+        VideoChat.hangUpButton.removeAttribute('disabled');
+        VideoChat.socket.on('hangup', VideoChat.hangUp);
+      },
+
+      onCandidate: function(candidate){
+        rtcCandidate = new RTCIceCandidate(JSON.parse(candidate));
+        VideoChat.peerConnection.addIceCandidate(rtcCandidate);
+      }
+    };
+
+    // Get the "Get Video" button.
+    VideoChat.videoButton = document.getElementById('get-video');
+
+    // When the "Get Video" button is clicked, run the requestMediaStream function.
+    VideoChat.videoButton.addEventListener(
+      'click',
+      VideoChat.requestMediaStream,
+      false
+    );
+
+    // Get the "Call" button.
+    VideoChat.callButton = document.getElementById('call');
+
+    // When the "Call" button is clicked, run the startCall function.
+    VideoChat.callButton.addEventListener(
+      'click',
+      VideoChat.startCall,
+      false
+    );
+
+    // Get the "Hang up" button.
+    VideoChat.hangUpButton = document.getElementById('hangup');
+
+    // When the "Hang up" button is clicked, run the hangUp function.
+    VideoChat.hangUpButton.addEventListener(
+      'click',
+      VideoChat.hangUp,
+      false
+    );
+
+
+  </script>
+</body>
+</html>
