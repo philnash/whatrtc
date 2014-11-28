@@ -2,6 +2,17 @@
 
 Slides and demos from the talk.
 
+To run the slide presentation, make sure you have node.js installed then on the command line:
+
+```bash
+$ git clone git@github.com:philnash/whatrtc.git
+$ cd whatrtc
+$ npm install
+$ npm start
+```
+
+Then open [http://localhost:3000](http://localhost:3000).
+
 ## Further resources
 
 * [Simple video chat example](https://github.com/philnash/video-chat)
