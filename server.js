@@ -16,7 +16,7 @@ server.route({
     io.sockets.emit('from', request.payload.From);
     io.sockets.emit('body', request.payload.Body);
     var twiml = new twilio.TwimlResponse();
-    twiml.message('Thanks for your message, there are slides, demos and more resources on this talk at https://github.com/philnash/whatrtc');
+    twiml.message('Thanks for your message! Read this blog post after the talk to see the code: http://bit.ly/stunturn');
     reply(twiml.toString());
   }
 });
