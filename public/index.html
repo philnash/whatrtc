@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=792, user-scalable=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <link href='http://fonts.googleapis.com/css?family=Raleway:900,400' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="shower/themes/phil/styles/screen.css">
 </head>
 <body class="list">
@@ -25,8 +26,8 @@
     <img src="pictures/twilio.png" class="place b l" style="width:30%;bottom:20%;left:96px">
   </div></section>
 
-  <section class="slide shout"><div>
-    <h2 style="text-align:center">+442033899329</h2>
+  <section class="slide shout small center"><div>
+    <h2>+442033899329</h2>
     <ul id="messages"></ul>
   </div></section>
 
@@ -34,8 +35,8 @@
     <h2>What is WebRTC?</h2>
   </div></section>
 
-  <section class="slide alt shout"><div>
-    <h2>Web Real Time Communication</h2>
+  <section class="slide alt shout small"><div>
+    <h2>Web <strong>Real Time Communication</strong></h2>
   </div></section>
 
   <section class="slide alt"><div>
@@ -68,17 +69,18 @@
     <ul id="logos">
       <li><img src="/pictures/chrome.png"></li>
       <li><img src="/pictures/firefox.png"></li>
-      <li><img src="/pictures/safari.png" class="nope"></li>
       <li><img src="/pictures/opera.png"></li>
+      <li><img src="/pictures/safari.png" class="nope"></li>
       <li><img src="/pictures/ie.png" class="nope"></li>
     </ul>
   </div></section>
 
   <section class="slide alt shout"><div>
-    <h2>What does WebRTC <strong>do?</strong></h2>
+    <h2>What does <strong>WebRTC</strong> do?</h2>
   </div></section>
 
   <section class="slide alt"><div>
+    <img src="/pictures/failed.png" width="75%" style="display:none;" id="fail" class="place c">
     <div id="videos">
       <video id="local-video" autoplay></video>
       <video id="remote-video" autoplay></video>
@@ -96,56 +98,50 @@
     <h2>How does it <strong>work?</strong></h2>
   </div></section>
 
-  <section class="slide alt shout"><div>
-    <h2>What <strong>doesn't</strong> WebRTC do?</h2>
-  </div></section>
-
-  <section class="slide shout alt"><div>
-    <h2>Tell the <strong>truth</strong></h2>
-  </div></section>
-
-  <section class="slide shout alt"><div>
-    <h2>Peer to Peer<strong>?</strong></h2>
-  </div></section>
-
-  <section class="slide shout alt cover h"><div>
-    <img src="/pictures/servers.jpg">
+  <section class="slide alt cover"><div>
+    <h2>Meet Alice and Bob</h2>
+    <img src="/pictures/alice-bob.png">
   </div></section>
 
   <section class="slide shout"><div>
     <h2>Presence</h2>
   </div></section>
 
-  <section class="slide alt long-line"><div>
-    <pre><code>  socket.on('join', function(room){</code>
-    <code>  var clients = io.sockets.adapter.rooms[room];</code>
-    <code>  var numClients = Object.keys(clients).length;</code>
-    <code>  if (numClients == 0) {</code>
-    <code>    socket.join(room);</code>
-    <code>  } else if (numClients == 1) {</code>
-    <code>    socket.join(room);</code>
-    <code>    socket.emit('ready', room);</code>
-    <code>    socket.broadcast.emit('ready', room);</code>
-    <code>  } else {</code>
-    <code>    socket.emit('full', room);</code>
-    <code>  }</code></pre>
+  <section class="slide alt cover"><div>
+    <h2>You need a server</h2>
+    <img src="/pictures/your-server.png">
+  </div></section>
+
+  <section class="slide alt cover"><div>
+    <h2>Alice logs on</h2>
+    <img src="/pictures/alice-presence.png">
+  </div></section>
+
+  <section class="slide alt cover"><div>
+    <h2>Bob logs on</h2>
+    <img src="/pictures/bob-presence.png">
+  </div></section>
+
+  <section class="slide alt cover"><div>
+    <h2>Alice knows Bob is there</h2>
+    <img src="/pictures/alice-knows-bob.png">
   </div></section>
 
   <section class="slide shout"><div>
     <h2>NAT Traversal</h2>
   </div></section>
 
-  <section class="slide alt cover w"><div>
+  <section class="slide alt cover h"><div>
     <img src="/pictures/vanilla_ice.jpg">
   </div></section>
 
   <section class="slide alt"><div>
     <h2>ICE ICE Baby</h2>
     <blockquote>
-      <p>All right stop, collaborate and listen<br/>
+      <p>All right stop, collaborate and listen<br>
       Ice is back with my brand new invention<br>
       Something grabs a hold of me tightly<br>
-      NAT Traversal goin on daily and nightly</p>
+      <strong>NAT Traversal</strong> goin on daily and nightly</p>
     </blockquote>
   </div></section>
 
@@ -160,121 +156,52 @@
     </ul>
   </div></section>
 
-  <section class="slide alt"><div>
-    <pre><code>config = { iceServers: [</code>
-    <code>    {"url":"stun:global.stun.twilio.com:3478?transport=udp"}</code>
-    <code>  ]</code>
-    <code>};</code>
-    <code>peerConnection = new RTCPeerConnection(config);</code>
-    <code>&nbsp;</code>
-    <code>peerConnection.onicecandidate = function(candidate){</code>
-    <code>  // do something</code>
-    <code>}</code></pre>
+  <section class="slide alt cover"><div>
+    <h2>Hidden behind NAT</h2>
+    <img src="/pictures/networks.png">
   </div></section>
 
-  <section class="slide" style="background-color:#272725"><div>
-    <img src="/pictures/nat.svg" class="place center" height="80%">
+  <section class="slide alt cover"><div>
+    <img src="/pictures/stun-turn.png">
+  </div></section>
+
+  <section class="slide alt cover"><div>
+    <h2>Alice gets ICE candidates</h2>
+    <img src="/pictures/alice-ice.png">
+  </div></section>
+
+  <section class="slide alt cover"><div>
+    <h2>Bob gets ICE candidates</h2>
+    <img src="/pictures/bob-ice.png">
   </div></section>
 
   <section class="slide shout"><div>
     <h2>Signalling</h2>
   </div></section>
 
-  <section class="slide" style="background-color:#272725"><div>
-    <img src="/pictures/nat.svg" class="place center" height="80%">
+  <section class="slide alt cover"><div>
+    <h2>Alice sends candidates to Bob</h2>
+    <img src="/pictures/alice-ice-to-bob.png">
   </div></section>
 
-  <section class="slide alt shout"><div>
-    <h2>Web<strong>Sockets</strong></h2>
+  <section class="slide alt cover"><div>
+    <h2>Bob sends candidates to Alice</h2>
+    <img src="/pictures/bob-ice-to-alice.png">
   </div></section>
 
-  <section class="slide alt shout"><div>
-    <h2>Warning:<br> <strong>Code ahead</strong></h2>
+  <section class="slide alt cover"><div>
+    <h2>Media offer/answer</h2>
+    <img src="/pictures/offer-answer.png">
   </div></section>
 
-  <section class="slide alt"><div>
-    <pre><code>peerConnection.onicecandidate = function(candidate){</code>
-    <code>  socket.emit('candidate', JSON.stringify(candidate));</code>
-    <code>}</code>
-    <code>&nbsp;</code>
-    <code>socket.on('candidate', function(candidate){</code>
-    <code>  rtcCandidate = new RTCIceCandidate(JSON.parse(candidate));</code>
-    <code>  peerConnection.addIceCandidate(rtcCandidate);</code>
-    <code>});</code></pre>
+  <section class="slide alt cover"><div>
+    <h2>Connection!</h2>
+    <img src="/pictures/connection.png">
   </div></section>
 
-  <section class="slide alt"><div>
-    <pre><code>socket.on('candidate', function(candidate){</code>
-    <code>  socket.broadcast.emit('candidate', candidate);</code>
-    <code>});</code></pre>
-  </div></section>
-
-  <section class="slide shout alt"><div>
-    <h2>What about <strong>media</strong>?<h2>
-  </div></section>
-
-  <section class="slide alt"><div>
-    <pre><code>getUserMedia({video: true, audio: false},</code>
-    <code>  function(stream){</code>
-      <code>    videoElement.src = URL.createObjectURL(stream);</code>
-      <code>    peerConnection.addStream(stream);</code>
-      <code>    peerConnection.createOffer(success, fail);</code>
-    <code>  },</code>
-    <code>  function(err) { console.log('Oh biscuits...'); }</code>
-    <code>);</code></pre>
-  </div></section>
-
-  <section class="slide alt"><div>
-    <pre><code>peerConnection.createOffer(</code>
-    <code>  function(offer){</code>
-    <code>    peerConnection.setLocalDescription(offer)</code>
-    <code>    socket.emit('offer', JSON.stringify(offer)</code>
-    <code>  },</code>
-    <code>  function(err){ console.log('Oh biscuits...'); });</code>
-    <code>);</code></pre>
-  </div></section>
-
-  <section class="slide alt"><div>
-    <pre><code>socket.on('offer', function(offer){</code>
-    <code>  socket.broadcast.emit('offer', offer);</code>
-    <code>});</code></pre>
-  </div></section>
-
-  <section class="slide alt"><div>
-    <pre><code>socket.on('offer', function(offer){</code>
-    <code>  rtcOffer = new RTCSessionDescription(JSON.parse(offer));</code>
-    <code>  peerConnection.setRemoteDescription(rtcOffer);</code>
-    <code>  peerConnection.createAnswer(</code>
-    <code>    function(answer){</code>
-    <code>      peerConnection.setLocalDescription(answer);</code>
-    <code>      socket.emit('answer', JSON.stringify(answer));</code>
-    <code>    },</code>
-    <code>    function(err){ console.log('Biscuits?'); }</code>
-    <code>  );</code>
-    <code>});</code></pre>
-  </div></section>
-
-  <section class="slide alt"><div>
-    <pre><code>socket.on('answer', function(answer){</code>
-    <code>  socket.broadcast.emit('answer', answer);</code>
-    <code>});</code></pre>
-  </div></section>
-
-  <section class="slide alt"><div>
-    <pre><code>socket.on('answer', function(answer){</code>
-    <code>  rtcAnswer = new RTCSessionDescription(JSON.parse(answer));</code>
-    <code>  peerConnection.setRemoteDescription(rtcAnswer);</code>
-    <code>});</code></pre>
-  </div></section>
-
-  <section class="slide alt"><div>
-    <pre><code>peerConnection.onaddstream = function(stream){</code>
-    <code>  remoteVideoElement.src = URL.createObjectURL(stream);</code>
-    <code>});</code></pre>
-  </div></section>
-
-  <section class="slide shout alt"><div>
-    <h2>No more <strong>code</strong></h2>
+  <section class="slide alt cover"><div>
+    <h2>TURN Connection!</h2>
+    <img src="/pictures/turn-connection.png">
   </div></section>
 
   <section class="slide shout"><div>
@@ -304,8 +231,8 @@
     </ul>
   </div></section>
 
-  <section class="slide alt"><div>
-    <h2>Remember when you texted in?</h2>
+  <section class="slide alt center"><div>
+    <h2>Remember those texts?</h2>
     <p><button class="btn" id="client-call" style="font-size:128px">Call</button></p>
   </div></section>
 
@@ -323,15 +250,10 @@
     <p style="margin-bottom:24px;">http://philna.sh</p>
     <p style="margin-bottom:24px;">philnash@twilio.com</p>
     <img src="pictures/twilio.png" class="place b l" style="width:30%;bottom:20%;left:96px">
-
-    <footer>
-      <p>Questions, how to contact me, etc</p>
-    </footer>
   </div></section>
 
-  <!-- <div class="progress"><div></div></div> -->
   <script src="shower/shower.min.js"></script>
-  <!-- Copyright © 2014 Phil Nash, Mint Digital. -->
+  <!-- Copyright © 2014 Phil Nash, Twilio. -->
 
   <script src="/socket.io/socket.io.js"></script>
   <script src="//static.twilio.com/libs/twiliojs/1.2/twilio.min.js"></script>
@@ -423,12 +345,14 @@
       hangUp: function(event){
         if(typeof event !== 'undefined') { VideoChat.socket.emit('hangup'); }
         VideoChat.peerConnection.close();
+        delete VideoChat.peerConnection;
         VideoChat.localVideo.pause();
         VideoChat.localVideo.src = '';
         VideoChat.remoteVideo.pause();
         VideoChat.remoteVideo.src = '';
         VideoChat.localStream.stop();
         VideoChat.hangUpButton.setAttribute('disabled', 'disabled');
+        VideoChat.videoButton.removeAttribute('disabled');
       },
 
       onOffer: function(offer){
@@ -491,6 +415,7 @@
 
       onAddStream: function(event){
         VideoChat.remoteVideo = document.getElementById('remote-video');
+        VideoChat.remoteStream = event.stream;
         VideoChat.remoteVideo.src = window.URL.createObjectURL(event.stream);
         VideoChat.callButton.setAttribute('disabled', 'disabled');
         VideoChat.hangUpButton.removeAttribute('disabled');
@@ -532,6 +457,17 @@
       VideoChat.hangUp,
       false
     );
+
+    window.addEventListener("keydown", function(ev){
+      if(ev.keyCode == 70){
+        var failImage = document.getElementById('fail'),
+            localVideo = document.getElementById('local-video'),
+            remoteVideo = document.getElementById('remote-video');
+        failImage.removeAttribute('style');
+        localVideo.setAttribute('style', 'display:none;')
+        remoteVideo.setAttribute('style', 'display:none;')
+      }
+    }, false);
 
 
   </script>
